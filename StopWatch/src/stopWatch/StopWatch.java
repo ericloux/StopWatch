@@ -8,6 +8,7 @@ import java.util.*;
 class StopWatch implements ActionListener {
 	
 	JLabel jlab;
+	JButton jbtn;
 	long start;
 	
 	StopWatch() {
@@ -16,14 +17,11 @@ class StopWatch implements ActionListener {
 		jfrm.setSize(230,  90);
 		jfrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JButton jbtnStart = new JButton("Start");
-		JButton jbtnStop = new JButton("Stop");
+		jbtn = new JButton("Start");
 		
-		jbtnStart.addActionListener(this);
-		jbtnStop.addActionListener(this);
+		jbtn.addActionListener(this);
 
-		jfrm.add(jbtnStart);
-		jfrm.add(jbtnStop);
+		jfrm.add(jbtn);
 		
 		jlab = new JLabel("Press Start");
 		jfrm.add(jlab);
@@ -37,10 +35,17 @@ class StopWatch implements ActionListener {
 		if (ae.getActionCommand().equals("Start")) {
 			start = cal.getTimeInMillis();
 			jlab.setText("Stopwatch running...");
+			jbtn.setText("Stop");
+			jbtn.setActionCommand("Stop");
+			
 		}
-		else
+		else { 
 			jlab.setText("Elapsed time is " + 
 				(double) (cal.getTimeInMillis() - start) / 1000);
+
+			jbtn.setText("Start");
+			jbtn.setActionCommand("Start");
+		}
 	}
 	
 	public static void main(String args[])	{
